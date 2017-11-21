@@ -25,7 +25,51 @@ composer require ramsey/http-range
 
 ## Examples
 
-TBD
+ramsey/http-range is designed to be used with [PSR-7][] `RequestInterface` and
+`ResponseInterface` objects. Assuming that `$request` and `$response` in the
+following example conform to these interfaces, the following example shows how
+to use this library to parse an HTTP `Range` header.
+
+The following HTTP request uses a `Range` header to request the first 500 bytes
+of the resource at `/image/1234`.
+
+``` http
+GET /image/1234 HTTP/1.1
+Host: example.com
+Range: bytes=0-499
+```
+
+When receiving a request like this, you can parse the `Range` header using the
+following.
+
+``` php
+use Ramsey\Http\Range\Exception\NoRangeException;
+use Ramsey\Http\Range\Range;
+
+$filePath = '/path/to/image/1234.jpg';
+$filePieces = [];
+
+$range = new Range($request, $response, filesize($filePath));
+
+try {
+    // getRanges() always returns an iterable collection of range values,
+    // even if there is only one range, as is the case in this example.
+    foreach ($range->getUnit()->getRanges() as $rangeValue) {
+        // Get length of bytes to read by subtracting start from end and adding 1.
+        $length = $rangeValue->getEnd() - $rangeValue->getStart() + 1;
+
+        $filePieces = file_get_contents(
+            $filePath,
+            false,
+            null,
+            $rangeValue->getStart(),
+            $length
+        );
+    }
+} catch (NoRangeException $e) {
+    // This wasn't a range request or the `Range` header was empty.
+}
+```
 
 
 ## Contributing
@@ -42,6 +86,7 @@ The ramsey/http-range library is copyright © [Ben Ramsey](https://benramsey.com
 [conduct]: https://github.com/ramsey/http-range/blob/master/CODE_OF_CONDUCT.md
 [packagist]: https://packagist.org/packages/ramsey/http-range
 [composer]: http://getcomposer.org/
+[psr7]: http://www.php-fig.org/psr/psr-7/
 [contributing]: https://github.com/ramsey/http-range/blob/master/CONTRIBUTING.md
 
 [badge-source]: http://img.shields.io/badge/source-ramsey/http--range-blue.svg?style=flat-square
