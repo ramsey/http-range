@@ -86,7 +86,7 @@ The ramsey/http-range library is copyright © [Ben Ramsey](https://benramsey.com
 [conduct]: https://github.com/ramsey/http-range/blob/master/CODE_OF_CONDUCT.md
 [packagist]: https://packagist.org/packages/ramsey/http-range
 [composer]: http://getcomposer.org/
-[psr7]: http://www.php-fig.org/psr/psr-7/
+[psr-7]: http://www.php-fig.org/psr/psr-7/
 [contributing]: https://github.com/ramsey/http-range/blob/master/CONTRIBUTING.md
 
 [badge-source]: http://img.shields.io/badge/source-ramsey/http--range-blue.svg?style=flat-square
