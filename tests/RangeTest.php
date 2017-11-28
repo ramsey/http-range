@@ -2,7 +2,6 @@
 namespace Ramsey\Http\Range\Test;
 
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 use Ramsey\Http\Range\Exception\NoRangeException;
 use Ramsey\Http\Range\Range;
 use Ramsey\Http\Range\UnitFactory;
@@ -13,7 +12,6 @@ class RangeTest extends TestCase
 {
     private $range;
     private $request;
-    private $response;
     private $size;
     private $unitFactory;
 
@@ -27,22 +25,15 @@ class RangeTest extends TestCase
         $this->request = \Mockery::mock(RequestInterface::class);
         $this->request->shouldReceive('getHeader')->with('Range')->andReturn($rangeHeader);
 
-        $this->response = \Mockery::mock(ResponseInterface::class);
-
         $this->unitFactory = \Mockery::mock(UnitFactoryInterface::class);
         $this->unitFactory->shouldReceive('getUnit')->with($rangeHeader[0], $this->size)->andReturn($this->unit);
 
-        $this->range = new Range($this->request, $this->response, $this->size, $this->unitFactory);
+        $this->range = new Range($this->request, $this->size, $this->unitFactory);
     }
 
     public function testGetRequest()
     {
         $this->assertSame($this->request, $this->range->getRequest());
-    }
-
-    public function testGetResponse()
-    {
-        $this->assertSame($this->response, $this->range->getResponse());
     }
 
     public function testGetSize()
@@ -57,7 +48,7 @@ class RangeTest extends TestCase
 
     public function testConstructorCreatesNewUnitFactory()
     {
-        $range = new Range($this->request, $this->response, $this->size);
+        $range = new Range($this->request, $this->size);
 
         $this->assertInstanceOf(UnitFactory::class, $range->getUnitFactory());
         $this->assertNotSame($this->unitFactory, $range->getUnitFactory());
@@ -73,7 +64,7 @@ class RangeTest extends TestCase
         $request = \Mockery::mock(RequestInterface::class);
         $request->shouldReceive('getHeader')->with('Range')->andReturn([]);
 
-        $range = new Range($request, $this->response, $this->size, $this->unitFactory);
+        $range = new Range($request, $this->size, $this->unitFactory);
 
         $this->expectException(NoRangeException::class);
         $this->expectExceptionMessage('The Range header is not present on this request or has no value');

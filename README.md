@@ -25,10 +25,10 @@ composer require ramsey/http-range
 
 ## Examples
 
-ramsey/http-range is designed to be used with [PSR-7][] `RequestInterface` and
-`ResponseInterface` objects. Assuming that `$request` and `$response` in the
-following example conform to these interfaces, the following example shows how
-to use this library to parse an HTTP `Range` header.
+ramsey/http-range is designed to be used with [PSR-7][] `RequestInterface`
+objects. Assuming that `$request` in the following example conforms to this
+interface, the following example shows how to use this library to parse an HTTP
+`Range` header.
 
 The following HTTP request uses a `Range` header to request the first 500 bytes
 of the resource at `/image/1234`.
@@ -49,7 +49,7 @@ use Ramsey\Http\Range\Range;
 $filePath = '/path/to/image/1234.jpg';
 $filePieces = [];
 
-$range = new Range($request, $response, filesize($filePath));
+$range = new Range($request, filesize($filePath));
 
 try {
     // getRanges() always returns an iterable collection of range values,

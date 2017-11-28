@@ -11,7 +11,6 @@
 
 namespace Ramsey\Http\Range;
 
-use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\RequestInterface;
 use Ramsey\Http\Range\Exception\NoRangeException;
 
@@ -28,11 +27,6 @@ class Range
     private $request;
 
     /**
-     * @var ResponseInterface
-     */
-    private $response;
-
-    /**
      * @var mixed
      */
     private $size;
@@ -44,18 +38,15 @@ class Range
 
     /**
      * @param RequestInterface $request
-     * @param ResponseInterface $response
      * @param mixed $size The total size of the entity for which a range is requested
      * @param UnitFactoryInterface $unitFactory
      */
     public function __construct(
         RequestInterface $request,
-        ResponseInterface $response,
         $size,
         UnitFactoryInterface $unitFactory = null
     ) {
         $this->request = $request;
-        $this->response = $response;
         $this->size = $size;
 
         if ($unitFactory === null) {
@@ -73,16 +64,6 @@ class Range
     public function getRequest()
     {
         return $this->request;
-    }
-
-    /**
-     * Returns the HTTP response object
-     *
-     * @return ResponseInterface
-     */
-    public function getResponse()
-    {
-        return $this->response;
     }
 
     /**
