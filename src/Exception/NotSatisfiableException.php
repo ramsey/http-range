@@ -11,9 +11,61 @@
 
 namespace Ramsey\Http\Range\Exception;
 
+use Exception;
+
 /**
  * Indicates the range given cannot be satisfied
  */
 class NotSatisfiableException extends HttpRangeException
 {
+    /**
+     * The range string that couldn't be satisfied
+     *
+     * @var string
+     */
+    private $range;
+
+    /**
+     * The total size of the entity being requested
+     *
+     * @var mixed
+     */
+    private $size;
+
+    /**
+     * Constructs a NotSatisfiableException
+     *
+     * @param string $message
+     * @param string $range
+     * @param mixed $size
+     * @param int $code
+     * @param Exception $previous
+     */
+    public function __construct($message, $range, $size, $code = 0, Exception $previous = null)
+    {
+        $this->range = $range;
+        $this->size = $size;
+
+        parent::__construct($message, $code, $previous);
+    }
+
+    /**
+     * Returns the range that couldn't be satisfied
+     *
+     * @return string
+     */
+    public function getRange()
+    {
+        return $this->range;
+    }
+
+    /**
+     * Returns the total size of the entity being requested
+     *
+     * @return mixed
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
 }

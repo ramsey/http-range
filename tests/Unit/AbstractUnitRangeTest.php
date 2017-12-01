@@ -18,18 +18,41 @@ class AbstractUnitRangeTest extends TestCase
 
     public function testConstructorThrowsNotSatisfiableExceptionWhenSuffixByteRangeSpecLengthIsZero()
     {
-        $this->expectException(NotSatisfiableException::class);
-        $this->expectExceptionMessage('Unable to satisfy range: -0; length is zero');
+        $e = null;
 
-        $range = \Mockery::mock(AbstractUnitRange::class, ['-0', '10000']);
+        try {
+            $range = \Mockery::mock(AbstractUnitRange::class, ['-0', '10000']);
+        } catch (\Exception $e) {
+            // Perform assertions on exception below; we're using this pattern
+            // so we can perform assertions on the additional exception methods
+            // added to NotSatisfiableException.
+        }
+
+        $this->assertInstanceOf(NotSatisfiableException::class, $e);
+        $this->assertEquals('Unable to satisfy range: -0; length is zero', $e->getMessage());
+        $this->assertEquals('-0', $e->getRange());
+        $this->assertEquals('10000', $e->getSize());
     }
 
     public function testConstructorThrowsNotSatisfiableExceptionWhenStartIsGreaterThanSize()
     {
-        $this->expectException(NotSatisfiableException::class);
-        $this->expectExceptionMessage('Unable to satisfy range: 10001-; start (10001) is greater than size (10000)');
+        $e = null;
 
-        $range = \Mockery::mock(AbstractUnitRange::class, ['10001-', '10000']);
+        try {
+            $range = \Mockery::mock(AbstractUnitRange::class, ['10001-', '10000']);
+        } catch (\Exception $e) {
+            // Perform assertions on exception below; we're using this pattern
+            // so we can perform assertions on the additional exception methods
+            // added to NotSatisfiableException.
+        }
+
+        $this->assertInstanceOf(NotSatisfiableException::class, $e);
+        $this->assertEquals(
+            'Unable to satisfy range: 10001-; start (10001) is greater than size (10000)',
+            $e->getMessage()
+        );
+        $this->assertEquals('10001-', $e->getRange());
+        $this->assertEquals('10000', $e->getSize());
     }
 
     public function testConstructorThrowsParseExceptionWhenEndIsLessThanStart()

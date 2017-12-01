@@ -131,13 +131,17 @@ abstract class AbstractUnitRange implements UnitRangeInterface
 
         if ($start == $size) {
             throw new NotSatisfiableException(
-                "Unable to satisfy range: {$range}; length is zero"
+                "Unable to satisfy range: {$range}; length is zero",
+                $range,
+                $size
             );
         }
 
         if ($start > $size) {
             throw new NotSatisfiableException(
-                "Unable to satisfy range: {$range}; start ({$start}) is greater than size ({$size})"
+                "Unable to satisfy range: {$range}; start ({$start}) is greater than size ({$size})",
+                $range,
+                $size
             );
         }
 
