@@ -66,7 +66,7 @@ class AbstractUnitRangeTest extends TestCase
     /**
      * @dataProvider validRangeValuesProvider
      */
-    public function testValidRangeValues($range, $size, $expectedStart, $expectedEnd)
+    public function testValidRangeValues($range, $size, $expectedStart, $expectedEnd, $expectedLength)
     {
         $unitRange = \Mockery::mock(AbstractUnitRange::class, [$range, $size])->makePartial();
 
@@ -74,19 +74,20 @@ class AbstractUnitRangeTest extends TestCase
         $this->assertEquals($size, $unitRange->getTotalSize());
         $this->assertEquals($expectedStart, $unitRange->getStart());
         $this->assertEquals($expectedEnd, $unitRange->getEnd());
+        $this->assertEquals($expectedLength, $unitRange->getLength());
     }
 
     public function validRangeValuesProvider()
     {
         return [
-            ['0-499', 1000, 0, 499],
-            ['0-499', 200, 0, 199],
-            ['40-80', 1000, 40, 80],
-            ['-400', 1000, 600, 999],
-            ['400-', 1000, 400, 999],
-            ['0-', 1000, 0, 999],
-            ['0-0', 1000, 0, 0],
-            ['-1', 1000, 999, 999],
+            ['0-499', 1000, 0, 499, 500],
+            ['0-499', 200, 0, 199, 200],
+            ['40-80', 1000, 40, 80, 41],
+            ['-400', 1000, 600, 999, 400],
+            ['400-', 1000, 400, 999, 600],
+            ['0-', 1000, 0, 999, 1000],
+            ['0-0', 1000, 0, 0, 1],
+            ['-1', 1000, 999, 999, 1],
         ];
     }
 }

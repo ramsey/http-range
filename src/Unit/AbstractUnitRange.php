@@ -86,6 +86,19 @@ abstract class AbstractUnitRange implements UnitRangeInterface
     }
 
     /**
+     * Returns the length of this range
+     *
+     * For example, if the total size is 1200, and the start is 700 and the end
+     * is 1199, then the length is 500.
+     *
+     * @return mixed
+     */
+    public function getLength()
+    {
+        return $this->getEnd() - $this->getStart() + 1;
+    }
+
+    /**
      * Returns the total size of the entity this unit range describes
      *
      * For example, if this unit range describes the bytes in a file, then this
