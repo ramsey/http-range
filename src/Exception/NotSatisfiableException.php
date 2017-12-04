@@ -30,21 +30,21 @@ class NotSatisfiableException extends HttpRangeException
      *
      * @var mixed
      */
-    private $size;
+    private $totalSize;
 
     /**
      * Constructs a NotSatisfiableException
      *
      * @param string $message
      * @param string $range
-     * @param mixed $size
+     * @param mixed $totalSize
      * @param int $code
      * @param Exception $previous
      */
-    public function __construct($message, $range, $size, $code = 0, Exception $previous = null)
+    public function __construct($message, $range, $totalSize, $code = 0, Exception $previous = null)
     {
         $this->range = $range;
-        $this->size = $size;
+        $this->totalSize = $totalSize;
 
         parent::__construct($message, $code, $previous);
     }
@@ -64,8 +64,8 @@ class NotSatisfiableException extends HttpRangeException
      *
      * @return mixed
      */
-    public function getSize()
+    public function getTotalSize()
     {
-        return $this->size;
+        return $this->totalSize;
     }
 }

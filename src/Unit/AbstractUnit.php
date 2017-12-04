@@ -24,7 +24,7 @@ abstract class AbstractUnit implements UnitInterface
     /**
      * @var mixed
      */
-    private $size;
+    private $totalSize;
 
     /**
      * Returns a new collection for this range unit
@@ -37,21 +37,21 @@ abstract class AbstractUnit implements UnitInterface
      * Returns a new unit range for this range unit
      *
      * @param string $range A single range (i.e. 500-999, 500-, -500)
-     * @param mixed $size The total size of the entity the range describes
+     * @param mixed $totalSize The total size of the entity the range describes
      * @return UnitRangeInterface
      */
-    abstract public function newRange($range, $size);
+    abstract public function newRange($range, $totalSize);
 
     /**
      * Constructs a new unit
      *
      * @param string $rangeSet A set of ranges for this unit (i.e. 500-999,500-,-500)
-     * @param mixed $size The total size of the entity the unit describes
+     * @param mixed $totalSize The total size of the entity the unit describes
      */
-    public function __construct($rangeSet, $size)
+    public function __construct($rangeSet, $totalSize)
     {
         $this->rangeSet = $rangeSet;
-        $this->size = $size;
+        $this->totalSize = $totalSize;
     }
 
     /**
@@ -88,11 +88,11 @@ abstract class AbstractUnit implements UnitInterface
     public function getRanges()
     {
         $ranges = explode(',', $this->getRangeSet());
-        $size = $this->getSize();
+        $totalSize = $this->getTotalSize();
         $collection = $this->newCollection();
 
         foreach ($ranges as $range) {
-            $collection[] = $this->newRange($range, $size);
+            $collection[] = $this->newRange($range, $totalSize);
         }
 
         return $collection;
@@ -106,8 +106,8 @@ abstract class AbstractUnit implements UnitInterface
      *
      * @return mixed
      */
-    public function getSize()
+    public function getTotalSize()
     {
-        return $this->size;
+        return $this->totalSize;
     }
 }

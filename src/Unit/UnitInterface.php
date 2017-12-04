@@ -63,5 +63,5 @@ interface UnitInterface
      *
      * @return mixed
      */
-    public function getSize();
+    public function getTotalSize();
 }

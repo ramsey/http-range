@@ -45,5 +45,5 @@ interface UnitRangeInterface
      *
      * @return mixed
      */
-    public function getSize();
+    public function getTotalSize();
 }

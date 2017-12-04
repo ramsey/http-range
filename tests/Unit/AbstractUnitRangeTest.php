@@ -31,7 +31,7 @@ class AbstractUnitRangeTest extends TestCase
         $this->assertInstanceOf(NotSatisfiableException::class, $e);
         $this->assertEquals('Unable to satisfy range: -0; length is zero', $e->getMessage());
         $this->assertEquals('-0', $e->getRange());
-        $this->assertEquals('10000', $e->getSize());
+        $this->assertEquals('10000', $e->getTotalSize());
     }
 
     public function testConstructorThrowsNotSatisfiableExceptionWhenStartIsGreaterThanSize()
@@ -52,7 +52,7 @@ class AbstractUnitRangeTest extends TestCase
             $e->getMessage()
         );
         $this->assertEquals('10001-', $e->getRange());
-        $this->assertEquals('10000', $e->getSize());
+        $this->assertEquals('10000', $e->getTotalSize());
     }
 
     public function testConstructorThrowsParseExceptionWhenEndIsLessThanStart()
@@ -71,7 +71,7 @@ class AbstractUnitRangeTest extends TestCase
         $unitRange = \Mockery::mock(AbstractUnitRange::class, [$range, $size])->makePartial();
 
         $this->assertEquals($range, $unitRange->getRange());
-        $this->assertEquals($size, $unitRange->getSize());
+        $this->assertEquals($size, $unitRange->getTotalSize());
         $this->assertEquals($expectedStart, $unitRange->getStart());
         $this->assertEquals($expectedEnd, $unitRange->getEnd());
     }

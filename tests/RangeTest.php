@@ -36,9 +36,9 @@ class RangeTest extends TestCase
         $this->assertSame($this->request, $this->range->getRequest());
     }
 
-    public function testGetSize()
+    public function testGetTotalSize()
     {
-        $this->assertSame($this->size, $this->range->getSize());
+        $this->assertSame($this->size, $this->range->getTotalSize());
     }
 
     public function testGetUnitFactory()

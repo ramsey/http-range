@@ -25,12 +25,12 @@ class UnitFactory implements UnitFactoryInterface
      * Returns a parsed unit for the HTTP Range header
      *
      * @param string $rangesSpecifier The original value of the HTTP Range header
-     * @param mixed $size The total size of the entity described by this unit
+     * @param mixed $totalSize The total size of the entity described by this unit
      * @return UnitInterface
      * @throws InvalidRangeUnitException
      * @throws InvalidRangeSetException
      */
-    public function getUnit($rangesSpecifier, $size)
+    public function getUnit($rangesSpecifier, $totalSize)
     {
         $unitSet = explode('=', $rangesSpecifier);
 
@@ -48,9 +48,9 @@ class UnitFactory implements UnitFactoryInterface
 
         switch (strtolower($unitSet[0])) {
             case 'bytes':
-                return new BytesUnit($unitSet[1], $size);
+                return new BytesUnit($unitSet[1], $totalSize);
             default:
-                return new GenericUnit($unitSet[0], $unitSet[1], $size);
+                return new GenericUnit($unitSet[0], $unitSet[1], $totalSize);
         }
     }
 }

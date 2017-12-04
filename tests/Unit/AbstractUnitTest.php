@@ -42,9 +42,9 @@ class AbstractUnitTest extends TestCase
         $this->assertSame('foobar=500-999,1500-', $this->unit->getRangesSpecifier());
     }
 
-    public function testGetSize()
+    public function testGetTotalSize()
     {
-        $this->assertSame('10000', $this->unit->getSize());
+        $this->assertSame('10000', $this->unit->getTotalSize());
     }
 
     public function testGetRanges()

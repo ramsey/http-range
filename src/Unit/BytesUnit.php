@@ -42,11 +42,11 @@ class BytesUnit extends AbstractUnit implements UnitInterface
      * Returns a new unit range for this range unit
      *
      * @param string $range A single range (i.e. 500-999, 500-, -500)
-     * @param mixed $size The total size of the entity the range describes
+     * @param mixed $totalSize The total size of the entity the range describes
      * @return UnitRangeInterface
      */
-    public function newRange($range, $size)
+    public function newRange($range, $totalSize)
     {
-        return new BytesRange($range, $size);
+        return new BytesRange($range, $totalSize);
     }
 }

@@ -29,7 +29,7 @@ class Range
     /**
      * @var mixed
      */
-    private $size;
+    private $totalSize;
 
     /**
      * @var UnitFactoryInterface
@@ -38,16 +38,16 @@ class Range
 
     /**
      * @param RequestInterface $request
-     * @param mixed $size The total size of the entity for which a range is requested
+     * @param mixed $totalSize The total size of the entity for which a range is requested
      * @param UnitFactoryInterface $unitFactory
      */
     public function __construct(
         RequestInterface $request,
-        $size,
+        $totalSize,
         UnitFactoryInterface $unitFactory = null
     ) {
         $this->request = $request;
-        $this->size = $size;
+        $this->totalSize = $totalSize;
 
         if ($unitFactory === null) {
             $unitFactory = new UnitFactory();
@@ -71,9 +71,9 @@ class Range
      *
      * @return mixed
      */
-    public function getSize()
+    public function getTotalSize()
     {
-        return $this->size;
+        return $this->totalSize;
     }
 
     /**
@@ -101,6 +101,6 @@ class Range
         }
 
         // Use only the first Range header found, for now.
-        return $this->getUnitFactory()->getUnit(trim($rangeHeader[0]), $this->getSize());
+        return $this->getUnitFactory()->getUnit(trim($rangeHeader[0]), $this->getTotalSize());
     }
 }

@@ -27,7 +27,7 @@ abstract class AbstractUnitRange implements UnitRangeInterface
     /**
      * @var mixed
      */
-    private $size;
+    private $totalSize;
 
     /**
      * @var mixed
@@ -43,16 +43,16 @@ abstract class AbstractUnitRange implements UnitRangeInterface
      * Constructs a new unit range
      *
      * @param string $range A single range (i.e. 500-999, 500-, -500)
-     * @param mixed $size The total size of the entity the range describes
+     * @param mixed $totalSize The total size of the entity the range describes
      * @throws ParseException If unable to parse the range
      * @throws NotSatisfiableException If the range cannot be satisfied
      */
-    public function __construct($range, $size)
+    public function __construct($range, $totalSize)
     {
         $this->range = $range;
-        $this->size = $size;
+        $this->totalSize = $totalSize;
 
-        list($this->start, $this->end) = $this->parseRange($range, $size);
+        list($this->start, $this->end) = $this->parseRange($range, $totalSize);
     }
 
     /**
@@ -93,9 +93,9 @@ abstract class AbstractUnitRange implements UnitRangeInterface
      *
      * @return mixed
      */
-    public function getSize()
+    public function getTotalSize()
     {
-        return $this->size;
+        return $this->totalSize;
     }
 
     /**
@@ -103,10 +103,10 @@ abstract class AbstractUnitRange implements UnitRangeInterface
      * start and the second is the end
      *
      * @param string $range The range string to parse
-     * @param mixed $size The total size of the entity
+     * @param mixed $totalSize The total size of the entity
      * @return array
      */
-    private function parseRange($range, $size)
+    private function parseRange($range, $totalSize)
     {
         $points = explode('-', $range, 2);
 
@@ -117,31 +117,31 @@ abstract class AbstractUnitRange implements UnitRangeInterface
         }
 
         $start = $points[0];
-        $end = ($points[1] !== '') ? $points[1] : ($size - 1);
+        $end = ($points[1] !== '') ? $points[1] : ($totalSize - 1);
 
-        if ($end >= $size) {
-            $end = $size - 1;
+        if ($end >= $totalSize) {
+            $end = $totalSize - 1;
         }
 
         if ($start === '') {
             // Use the "suffix-byte-range-spec".
-            $start = $size - $end;
-            $end = $size - 1;
+            $start = $totalSize - $end;
+            $end = $totalSize - 1;
         }
 
-        if ($start == $size) {
+        if ($start == $totalSize) {
             throw new NotSatisfiableException(
                 "Unable to satisfy range: {$range}; length is zero",
                 $range,
-                $size
+                $totalSize
             );
         }
 
-        if ($start > $size) {
+        if ($start > $totalSize) {
             throw new NotSatisfiableException(
-                "Unable to satisfy range: {$range}; start ({$start}) is greater than size ({$size})",
+                "Unable to satisfy range: {$range}; start ({$start}) is greater than size ({$totalSize})",
                 $range,
-                $size
+                $totalSize
             );
         }
 
