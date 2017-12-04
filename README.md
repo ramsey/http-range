@@ -55,15 +55,12 @@ try {
     // getRanges() always returns an iterable collection of range values,
     // even if there is only one range, as is the case in this example.
     foreach ($range->getUnit()->getRanges() as $rangeValue) {
-        // Get length of bytes to read by subtracting start from end and adding 1.
-        $length = $rangeValue->getEnd() - $rangeValue->getStart() + 1;
-
-        $filePieces = file_get_contents(
+        $filePieces[] = file_get_contents(
             $filePath,
             false,
             null,
             $rangeValue->getStart(),
-            $length
+            $rangeValue->getLength()
         );
     }
 } catch (NoRangeException $e) {
