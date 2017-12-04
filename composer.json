@@ -35,6 +35,7 @@
         }
     },
     "scripts": {
+        "coverage-html": "phpunit --verbose --colors=always --coverage-html=build/coverage",
         "lint": "parallel-lint src tests",
         "phpunit": "phpunit --verbose --colors=always",
         "phpcs": "phpcs src tests --standard=psr2 -sp --colors",
