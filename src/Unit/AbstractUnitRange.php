@@ -123,7 +123,18 @@ abstract class AbstractUnitRange implements UnitRangeInterface
     {
         $points = explode('-', $range, 2);
 
-        if (count($points) !== 2 || ($points[0] === '' && $points[1] === '')) {
+        if (!isset($points[1])) {
+            // Assume the request is for a single item.
+            $points[1] = $points[0];
+        }
+
+        $isValidRangeValue = function ($value) {
+            return (ctype_digit($value) || $value === '');
+        };
+
+        if (empty(array_filter($points, 'ctype_digit'))
+            || array_filter($points, $isValidRangeValue) !== $points
+        ) {
             throw new ParseException(
                 "Unable to parse range: {$range}"
             );

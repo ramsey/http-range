@@ -16,6 +16,22 @@ class AbstractUnitRangeTest extends TestCase
         $range = \Mockery::mock(AbstractUnitRange::class, ['', '10000']);
     }
 
+    public function testConstructorThrowsParseExceptionWhenBothSidesAreEmpty()
+    {
+        $this->expectException(ParseException::class);
+        $this->expectExceptionMessage('Unable to parse range: -');
+
+        $range = \Mockery::mock(AbstractUnitRange::class, ['-', '10000']);
+    }
+
+    public function testConstructorThrowsParseExceptionWhenMoreThanTwoValues()
+    {
+        $this->expectException(ParseException::class);
+        $this->expectExceptionMessage('Unable to parse range: 1-2-3');
+
+        $range = \Mockery::mock(AbstractUnitRange::class, ['1-2-3', '10000']);
+    }
+
     public function testConstructorThrowsNotSatisfiableExceptionWhenSuffixByteRangeSpecLengthIsZero()
     {
         $e = null;
@@ -88,6 +104,7 @@ class AbstractUnitRangeTest extends TestCase
             ['0-', 1000, 0, 999, 1000],
             ['0-0', 1000, 0, 0, 1],
             ['-1', 1000, 999, 999, 1],
+            ['136', 1000, 136, 136, 1],
         ];
     }
 }
