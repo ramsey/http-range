@@ -15,6 +15,7 @@ use Ramsey\Http\Range\Exception\InvalidRangeSetException;
 use Ramsey\Http\Range\Exception\InvalidRangeUnitException;
 use Ramsey\Http\Range\Unit\BytesUnit;
 use Ramsey\Http\Range\Unit\GenericUnit;
+use Ramsey\Http\Range\Unit\UnitInterface;
 
 /**
  * A default factory for creating bytes range units
@@ -26,9 +27,11 @@ class UnitFactory implements UnitFactoryInterface
      *
      * @param string $rangesSpecifier The original value of the HTTP Range header
      * @param mixed $totalSize The total size of the entity described by this unit
-     * @return UnitInterface
+     * 
      * @throws InvalidRangeUnitException
      * @throws InvalidRangeSetException
+     * 
+     * @return UnitInterface
      */
     public function getUnit($rangesSpecifier, $totalSize)
     {

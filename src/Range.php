@@ -13,6 +13,7 @@ namespace Ramsey\Http\Range;
 
 use Psr\Http\Message\RequestInterface;
 use Ramsey\Http\Range\Exception\NoRangeException;
+use Ramsey\Http\Range\Unit\UnitInterface;
 
 /**
  * Represents an HTTP Range request header
@@ -88,9 +89,10 @@ class Range
 
     /**
      * Returns the unit parsed for this range request
+     * 
+     * @throws NoRangeException if a range request is not present in the current request
      *
      * @return UnitInterface
-     * @throws NoRangeException if a range request is not present in the current request
      */
     public function getUnit()
     {
