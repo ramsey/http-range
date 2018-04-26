@@ -89,7 +89,7 @@ class Range
 
     /**
      * Returns the unit parsed for this range request
-     * 
+     *
      * @throws NoRangeException if a range request is not present in the current request
      *
      * @return UnitInterface

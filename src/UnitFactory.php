@@ -27,10 +27,10 @@ class UnitFactory implements UnitFactoryInterface
      *
      * @param string $rangesSpecifier The original value of the HTTP Range header
      * @param mixed $totalSize The total size of the entity described by this unit
-     * 
+     *
      * @throws InvalidRangeUnitException
      * @throws InvalidRangeSetException
-     * 
+     *
      * @return UnitInterface
      */
     public function getUnit($rangesSpecifier, $totalSize)
