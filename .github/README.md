@@ -44,10 +44,10 @@ The ramsey/http-range library is copyright © [Ben Ramsey](https://benramsey.com
 
 
 [http range requests]: https://tools.ietf.org/html/rfc7233
-[conduct]: https://github.com/ramsey/http-range/blob/master/CODE_OF_CONDUCT.md
+[conduct]: https://github.com/ramsey/http-range/blob/master/.github/CODE_OF_CONDUCT.md
 [packagist]: https://packagist.org/packages/ramsey/http-range
 [composer]: http://getcomposer.org/
-[contributing]: https://github.com/ramsey/http-range/blob/master/CONTRIBUTING.md
+[contributing]: https://github.com/ramsey/http-range/blob/master/.github/CONTRIBUTING.md
 [apidocs]: https://docs.benramsey.com/ramsey-http-range/latest/
 
 [badge-source]: http://img.shields.io/badge/source-ramsey/http--range-blue.svg?style=flat-square
