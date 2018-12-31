@@ -23,50 +23,14 @@ composer require ramsey/http-range
 ```
 
 
+## API documentation
+
+The [latest class API documentation][apidocs] is available online.
+
+
 ## Examples
 
-ramsey/http-range is designed to be used with [PSR-7][] `RequestInterface`
-objects. Assuming that `$request` in the following example conforms to this
-interface, the following example shows how to use this library to parse an HTTP
-`Range` header.
-
-The following HTTP request uses a `Range` header to request the first 500 bytes
-of the resource at `/image/1234`.
-
-``` http
-GET /image/1234 HTTP/1.1
-Host: example.com
-Range: bytes=0-499
-```
-
-When receiving a request like this, you can parse the `Range` header using the
-following.
-
-``` php
-use Ramsey\Http\Range\Exception\NoRangeException;
-use Ramsey\Http\Range\Range;
-
-$filePath = '/path/to/image/1234.jpg';
-$filePieces = [];
-
-$range = new Range($request, filesize($filePath));
-
-try {
-    // getRanges() always returns an iterable collection of range values,
-    // even if there is only one range, as is the case in this example.
-    foreach ($range->getUnit()->getRanges() as $rangeValue) {
-        $filePieces[] = file_get_contents(
-            $filePath,
-            false,
-            null,
-            $rangeValue->getStart(),
-            $rangeValue->getLength()
-        );
-    }
-} catch (NoRangeException $e) {
-    // This wasn't a range request or the `Range` header was empty.
-}
-```
+Examples of how to use this library can be found in the [Wiki pages](https://github.com/ramsey/http-range/wiki/Examples).
 
 
 ## Contributing
@@ -83,11 +47,10 @@ The ramsey/http-range library is copyright © [Ben Ramsey](https://benramsey.com
 [conduct]: https://github.com/ramsey/http-range/blob/master/CODE_OF_CONDUCT.md
 [packagist]: https://packagist.org/packages/ramsey/http-range
 [composer]: http://getcomposer.org/
-[psr-7]: http://www.php-fig.org/psr/psr-7/
 [contributing]: https://github.com/ramsey/http-range/blob/master/CONTRIBUTING.md
+[apidocs]: https://docs.benramsey.com/ramsey-http-range/latest/
 
 [badge-source]: http://img.shields.io/badge/source-ramsey/http--range-blue.svg?style=flat-square
-[badge-release]: https://img.shields.io/packagist/v/ramsey/http-range.svg?style=flat-square
 [badge-release]: https://img.shields.io/github/release/ramsey/http-range.svg?style=flat-square
 [badge-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [badge-build]: https://img.shields.io/travis/ramsey/http-range/master.svg?style=flat-square
@@ -95,7 +58,7 @@ The ramsey/http-range library is copyright © [Ben Ramsey](https://benramsey.com
 [badge-downloads]: https://img.shields.io/packagist/dt/ramsey/http-range.svg?style=flat-square
 
 [source]: https://github.com/ramsey/http-range
-[release]: https://packagist.org/packages/ramsey/http-range
+[release]: https://github.com/ramsey/http-range/releases
 [license]: https://github.com/ramsey/http-range/blob/master/LICENSE
 [build]: https://travis-ci.org/ramsey/http-range
 [coverage]: https://coveralls.io/r/ramsey/http-range?branch=master

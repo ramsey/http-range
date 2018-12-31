@@ -2,7 +2,7 @@
 
 Contributions are welcome. I accept pull requests on [GitHub](https://github.com/ramsey/http-range).
 
-This project adheres to a [Contributor Code of Conduct](https://github.com/ramsey/http-range/blob/master/CODE_OF_CONDUCT.md). By participating in this project and its community, you are expected to uphold this code.
+This project adheres to a [Contributor Code of Conduct](https://github.com/ramsey/http-range/blob/master/.github/CODE_OF_CONDUCT.md). By participating in this project and its community, you are expected to uphold this code.
 
 ## Communication Channels
 
@@ -36,18 +36,20 @@ If you have an idea for a new feature, it's a good idea to check out the [issues
 When you do begin working on your feature, here are some guidelines to consider:
 
 * Your pull request description should clearly detail the changes you have made. I will use this description to update the CHANGELOG. If there is no description or it does not adequately describe your feature, I will ask you to update the description.
-* ramsey/http-range follows the **[PSR-2 coding standard](http://www.php-fig.org/psr/psr-2/)**. Please ensure your code does, too.
+* ramsey/http-range follows the **[PSR-12 coding standard](https://github.com/php-fig/fig-standards/blob/master/proposed/extended-coding-style-guide.md)**. Please ensure your code does, too.
 * Please **write tests** for any new features you add.
 * Please **ensure that tests pass** before submitting your pull request. ramsey/http-range has Travis CI automatically running tests for pull requests. However, running the tests locally will help save time.
 * **Use topic/feature branches.** Please do not ask to pull from your master branch.
+  * For more information, see "[Understanding the GitHub flow](https://guides.github.com/introduction/flow/)."
 * **Submit one feature per pull request.** If you have multiple features you wish to submit, please break them up into separate pull requests.
-* **Send coherent history**. Make sure each individual commit in your pull request is meaningful. If you had to make multiple intermediate commits while developing, please squash them before submitting.
+* **Write good commit messages.** Make sure each individual commit in your pull request is meaningful. If you had to make multiple intermediate commits while developing, please squash them before submitting.
+  * For more information, see "[How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit/)."
 
 ## Running Tests
 
 The following must pass before I will accept a pull request. If this does not pass, it will result in a complete build failure. Before you can run this, be sure to `composer install`.
 
-To run all the tests and coding standards checks, execute the following from the command line, while in the project root directory (the came place as the `composer.json` file):
+To run all the tests and coding standards checks, execute the following from the command line, while in the project root directory (the same place as the `composer.json` file):
 
 ```
 composer test
