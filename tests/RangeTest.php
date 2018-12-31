@@ -13,6 +13,7 @@ class RangeTest extends TestCase
     private $range;
     private $request;
     private $size;
+    private $unit;
     private $unitFactory;
 
     protected function setUp()

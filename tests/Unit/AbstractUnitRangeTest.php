@@ -4,6 +4,7 @@ namespace Ramsey\Http\Range\Test\Unit;
 use Ramsey\Http\Range\Exception\NotSatisfiableException;
 use Ramsey\Http\Range\Exception\ParseException;
 use Ramsey\Http\Range\Test\TestCase;
+use Ramsey\Http\Range\Test\Unit\Mock\MockUnitRange;
 use Ramsey\Http\Range\Unit\AbstractUnitRange;
 
 class AbstractUnitRangeTest extends TestCase
@@ -38,7 +39,7 @@ class AbstractUnitRangeTest extends TestCase
 
         try {
             $range = \Mockery::mock(AbstractUnitRange::class, ['-0', '10000']);
-        } catch (\Exception $e) {
+        } catch (NotSatisfiableException $e) {
             // Perform assertions on exception below; we're using this pattern
             // so we can perform assertions on the additional exception methods
             // added to NotSatisfiableException.
@@ -56,7 +57,7 @@ class AbstractUnitRangeTest extends TestCase
 
         try {
             $range = \Mockery::mock(AbstractUnitRange::class, ['10001-', '10000']);
-        } catch (\Exception $e) {
+        } catch (NotSatisfiableException $e) {
             // Perform assertions on exception below; we're using this pattern
             // so we can perform assertions on the additional exception methods
             // added to NotSatisfiableException.
@@ -84,7 +85,7 @@ class AbstractUnitRangeTest extends TestCase
      */
     public function testValidRangeValues($range, $size, $expectedStart, $expectedEnd, $expectedLength)
     {
-        $unitRange = \Mockery::mock(AbstractUnitRange::class, [$range, $size])->makePartial();
+        $unitRange = new MockUnitRange($range, $size);
 
         $this->assertEquals($range, $unitRange->getRange());
         $this->assertEquals($size, $unitRange->getTotalSize());
