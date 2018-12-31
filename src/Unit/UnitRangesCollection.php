@@ -17,7 +17,7 @@ use Ramsey\Collection\AbstractCollection;
 use Ramsey\Collection\CollectionInterface;
 
 /**
- * A collection of UnitRangeInterface objects.
+ * A collection of `UnitRangeInterface` objects.
  */
 class UnitRangesCollection extends AbstractCollection implements CollectionInterface
 {

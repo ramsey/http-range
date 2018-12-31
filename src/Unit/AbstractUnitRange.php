@@ -44,7 +44,7 @@ abstract class AbstractUnitRange implements UnitRangeInterface
     /**
      * Constructs a new unit range.
      *
-     * @param string $range A single range (i.e. 500-999, 500-, -500).
+     * @param string $range A single range (i.e. `500-999`, `500-`, `-500`).
      * @param mixed $totalSize The total size of the entity the range describes.
      *
      * @throws ParseException if unable to parse the range.

@@ -38,7 +38,7 @@ abstract class AbstractUnit implements UnitInterface
     /**
      * Returns a new unit range for this range unit.
      *
-     * @param string $range A single range (i.e. 500-999, 500-, -500).
+     * @param string $range A single range (i.e. `500-999`, `500-`, `-500`).
      * @param mixed $totalSize The total size of the entity the range describes.
      *
      * @return UnitRangeInterface
@@ -48,7 +48,7 @@ abstract class AbstractUnit implements UnitInterface
     /**
      * Constructs a new unit.
      *
-     * @param string $rangeSet A set of ranges for this unit (i.e. 500-999,500-,-500).
+     * @param string $rangeSet A set of ranges for this unit (i.e. `500-999,500-,-500`).
      * @param mixed $totalSize The total size of the entity the unit describes.
      */
     public function __construct(string $rangeSet, $totalSize)
@@ -60,7 +60,9 @@ abstract class AbstractUnit implements UnitInterface
     /**
      * Returns the raw range set defined for this unit.
      *
-     *     other-range-set = 1*VCHAR
+     * ```
+     * other-range-set = 1*VCHAR
+     * ```
      *
      * @link https://tools.ietf.org/html/rfc7233#section-3.1 RFC 7233 § 3.1
      *
@@ -74,7 +76,9 @@ abstract class AbstractUnit implements UnitInterface
     /**
      * Returns the raw ranges specifier defined for this unit.
      *
-     *     other-ranges-specifier = other-range-unit "=" other-range-set
+     * ```
+     * other-ranges-specifier = other-range-unit "=" other-range-set
+     * ```
      *
      * @link https://tools.ietf.org/html/rfc7233#section-3.1 RFC 7233 § 3.1
      *

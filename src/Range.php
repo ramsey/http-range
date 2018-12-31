@@ -20,7 +20,8 @@ use Ramsey\Http\Range\Unit\UnitInterface;
 /**
  * `Range` represents an HTTP Range request header.
  *
- * @link https://tools.ietf.org/html/rfc7233 RFC 7233: HTTP Range Requests
+ * For more information about range requests, see
+ * [RFC 7233: HTTP Range Requests](https://tools.ietf.org/html/rfc7233).
  */
 class Range
 {
