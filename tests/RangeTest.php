@@ -16,7 +16,7 @@ class RangeTest extends TestCase
     private $unit;
     private $unitFactory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $rangeHeader = ['bytes=100-200'];
 
