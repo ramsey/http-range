@@ -10,7 +10,7 @@ class AbstractUnitTest extends TestCase
 {
     protected $unit;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->unit = \Mockery::mock(
             AbstractUnit::class,
