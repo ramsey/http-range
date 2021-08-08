@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the ramsey/http-range library
  *
@@ -139,7 +140,8 @@ abstract class AbstractUnitRange implements UnitRangeInterface
             return (ctype_digit($value) || $value === '');
         };
 
-        if (empty(array_filter($points, 'ctype_digit'))
+        if (
+            empty(array_filter($points, 'ctype_digit'))
             || array_filter($points, $isValidRangeValue) !== $points
         ) {
             throw new ParseException(

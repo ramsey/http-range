@@ -1,4 +1,5 @@
 <?php
+
 namespace Ramsey\Http\Range\Test;
 
 use Ramsey\Http\Range\Exception\InvalidRangeSetException;

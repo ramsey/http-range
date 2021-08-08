@@ -1,4 +1,5 @@
 <?php
+
 namespace Ramsey\Http\Range\Test\Unit;
 
 use Ramsey\Http\Range\Exception\NotSatisfiableException;

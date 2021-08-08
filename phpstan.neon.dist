@@ -1,0 +1,8 @@
+includes:
+	- vendor/phpstan/phpstan-mockery/extension.neon
+parameters:
+    tmpDir: ./build/cache/phpstan
+    level: max
+    paths:
+        - ./src
+        - ./tests
