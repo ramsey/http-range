@@ -3,3 +3,5 @@
 /phpcs.xml
 /phpunit.xml
 /vendor/
+/.idea
+.phpunit.result.cache
