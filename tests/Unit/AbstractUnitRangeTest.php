@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ramsey\Http\Range\Test\Unit;
 
+use Mockery;
 use Ramsey\Http\Range\Exception\NotSatisfiableException;
 use Ramsey\Http\Range\Exception\ParseException;
 use Ramsey\Http\Range\Test\TestCase;
@@ -10,36 +13,36 @@ use Ramsey\Http\Range\Unit\AbstractUnitRange;
 
 class AbstractUnitRangeTest extends TestCase
 {
-    public function testConstructorThrowsParseExceptionWhenRangeIsEmpty()
+    public function testConstructorThrowsParseExceptionWhenRangeIsEmpty(): void
     {
         $this->expectException(ParseException::class);
         $this->expectExceptionMessage('Unable to parse range: ');
 
-        $range = \Mockery::mock(AbstractUnitRange::class, ['', '10000']);
+        Mockery::mock(AbstractUnitRange::class, ['', '10000']);
     }
 
-    public function testConstructorThrowsParseExceptionWhenBothSidesAreEmpty()
+    public function testConstructorThrowsParseExceptionWhenBothSidesAreEmpty(): void
     {
         $this->expectException(ParseException::class);
         $this->expectExceptionMessage('Unable to parse range: -');
 
-        $range = \Mockery::mock(AbstractUnitRange::class, ['-', '10000']);
+        Mockery::mock(AbstractUnitRange::class, ['-', '10000']);
     }
 
-    public function testConstructorThrowsParseExceptionWhenMoreThanTwoValues()
+    public function testConstructorThrowsParseExceptionWhenMoreThanTwoValues(): void
     {
         $this->expectException(ParseException::class);
         $this->expectExceptionMessage('Unable to parse range: 1-2-3');
 
-        $range = \Mockery::mock(AbstractUnitRange::class, ['1-2-3', '10000']);
+        Mockery::mock(AbstractUnitRange::class, ['1-2-3', '10000']);
     }
 
-    public function testConstructorThrowsNotSatisfiableExceptionWhenSuffixByteRangeSpecLengthIsZero()
+    public function testConstructorThrowsNotSatisfiableExceptionWhenSuffixByteRangeSpecLengthIsZero(): void
     {
         $e = null;
 
         try {
-            $range = \Mockery::mock(AbstractUnitRange::class, ['-0', '10000']);
+            Mockery::mock(AbstractUnitRange::class, ['-0', '10000']);
         } catch (NotSatisfiableException $e) {
             // Perform assertions on exception below; we're using this pattern
             // so we can perform assertions on the additional exception methods
@@ -52,12 +55,12 @@ class AbstractUnitRangeTest extends TestCase
         $this->assertEquals('10000', $e->getTotalSize());
     }
 
-    public function testConstructorThrowsNotSatisfiableExceptionWhenStartIsGreaterThanSize()
+    public function testConstructorThrowsNotSatisfiableExceptionWhenStartIsGreaterThanSize(): void
     {
         $e = null;
 
         try {
-            $range = \Mockery::mock(AbstractUnitRange::class, ['10001-', '10000']);
+            Mockery::mock(AbstractUnitRange::class, ['10001-', '10000']);
         } catch (NotSatisfiableException $e) {
             // Perform assertions on exception below; we're using this pattern
             // so we can perform assertions on the additional exception methods
@@ -67,25 +70,30 @@ class AbstractUnitRangeTest extends TestCase
         $this->assertInstanceOf(NotSatisfiableException::class, $e);
         $this->assertEquals(
             'Unable to satisfy range: 10001-; start (10001) is greater than size (10000)',
-            $e->getMessage()
+            $e->getMessage(),
         );
         $this->assertEquals('10001-', $e->getRange());
         $this->assertEquals('10000', $e->getTotalSize());
     }
 
-    public function testConstructorThrowsParseExceptionWhenEndIsLessThanStart()
+    public function testConstructorThrowsParseExceptionWhenEndIsLessThanStart(): void
     {
         $this->expectException(ParseException::class);
         $this->expectExceptionMessage('The end value cannot be less than the start value: 9999-500');
 
-        $range = \Mockery::mock(AbstractUnitRange::class, ['9999-500', '10000']);
+        Mockery::mock(AbstractUnitRange::class, ['9999-500', '10000']);
     }
 
     /**
      * @dataProvider validRangeValuesProvider
      */
-    public function testValidRangeValues($range, $size, $expectedStart, $expectedEnd, $expectedLength)
-    {
+    public function testValidRangeValues(
+        string $range,
+        int $size,
+        int $expectedStart,
+        int $expectedEnd,
+        int $expectedLength
+    ): void {
         $unitRange = new MockUnitRange($range, $size);
 
         $this->assertEquals($range, $unitRange->getRange());
@@ -95,7 +103,10 @@ class AbstractUnitRangeTest extends TestCase
         $this->assertEquals($expectedLength, $unitRange->getLength());
     }
 
-    public function validRangeValuesProvider()
+    /**
+     * @return mixed[]
+     */
+    public function validRangeValuesProvider(): array
     {
         return [
             ['0-499', 1000, 0, 499, 500],

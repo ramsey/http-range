@@ -17,15 +17,16 @@ namespace Ramsey\Http\Range\Unit;
 use Ramsey\Http\Range\Exception\NotSatisfiableException;
 use Ramsey\Http\Range\Exception\ParseException;
 
+use function array_filter;
+use function ctype_digit;
+use function explode;
+
 /**
  * `AbstractUnitRange` provides a basic implementation for unit ranges.
  */
 abstract class AbstractUnitRange implements UnitRangeInterface
 {
-    /**
-     * @var string
-     */
-    private $range;
+    private string $range;
 
     /**
      * @var mixed
@@ -56,13 +57,11 @@ abstract class AbstractUnitRange implements UnitRangeInterface
         $this->range = $range;
         $this->totalSize = $totalSize;
 
-        list($this->start, $this->end) = $this->parseRange($range, $totalSize);
+        [$this->start, $this->end] = $this->parseRange($range, $totalSize);
     }
 
     /**
      * Returns the raw range.
-     *
-     * @return string
      */
     public function getRange(): string
     {
@@ -99,7 +98,7 @@ abstract class AbstractUnitRange implements UnitRangeInterface
      */
     public function getLength()
     {
-        return $this->getEnd() - $this->getStart() + 1;
+        return (int) $this->getEnd() - (int) $this->getStart() + 1;
     }
 
     /**
@@ -122,12 +121,12 @@ abstract class AbstractUnitRange implements UnitRangeInterface
      * @param string $range The range string to parse.
      * @param mixed $totalSize The total size of the entity.
      *
-     * @return array
+     * @return int[]
      *
      * @throws ParseException if unable to parse the range.
      * @throws NotSatisfiableException if the range cannot be satisfied.
      */
-    private function parseRange(string $range, $totalSize)
+    private function parseRange(string $range, $totalSize): array
     {
         $points = explode('-', $range, 2);
 
@@ -136,21 +135,20 @@ abstract class AbstractUnitRange implements UnitRangeInterface
             $points[1] = $points[0];
         }
 
-        $isValidRangeValue = function ($value) {
-            return (ctype_digit($value) || $value === '');
-        };
+        $isValidRangeValue = fn (string $value): bool => ctype_digit($value) || $value === '';
 
         if (
-            empty(array_filter($points, 'ctype_digit'))
+            !array_filter($points, 'ctype_digit')
             || array_filter($points, $isValidRangeValue) !== $points
         ) {
             throw new ParseException(
-                "Unable to parse range: {$range}"
+                "Unable to parse range: {$range}",
             );
         }
 
+        $totalSize = (int) $totalSize;
         $start = $points[0];
-        $end = ($points[1] !== '') ? $points[1] : ($totalSize - 1);
+        $end = $points[1] !== '' ? (int) $points[1] : $totalSize - 1;
 
         if ($end >= $totalSize) {
             $end = $totalSize - 1;
@@ -162,11 +160,13 @@ abstract class AbstractUnitRange implements UnitRangeInterface
             $end = $totalSize - 1;
         }
 
-        if ($start == $totalSize) {
+        $start = (int) $start;
+
+        if ($start === $totalSize) {
             throw new NotSatisfiableException(
                 "Unable to satisfy range: {$range}; length is zero",
                 $range,
-                $totalSize
+                $totalSize,
             );
         }
 
@@ -174,13 +174,13 @@ abstract class AbstractUnitRange implements UnitRangeInterface
             throw new NotSatisfiableException(
                 "Unable to satisfy range: {$range}; start ({$start}) is greater than size ({$totalSize})",
                 $range,
-                $totalSize
+                $totalSize,
             );
         }
 
         if ($end < $start) {
             throw new ParseException(
-                "The end value cannot be less than the start value: {$range}"
+                "The end value cannot be less than the start value: {$range}",
             );
         }
 

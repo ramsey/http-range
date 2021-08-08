@@ -14,9 +14,11 @@ declare(strict_types=1);
 
 namespace Ramsey\Http\Range\Exception;
 
+use RuntimeException;
+
 /**
  * A general exception for ramsey/http-range.
  */
-class HttpRangeException extends \RuntimeException
+class HttpRangeException extends RuntimeException
 {
 }

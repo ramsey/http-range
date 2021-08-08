@@ -1,7 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ramsey\Http\Range\Test\Unit;
 
+use Mockery;
+use Mockery\MockInterface;
 use Ramsey\Http\Range\Test\TestCase;
 use Ramsey\Http\Range\Unit\AbstractUnit;
 use Ramsey\Http\Range\Unit\UnitRangeInterface;
@@ -9,11 +13,12 @@ use Ramsey\Http\Range\Unit\UnitRangesCollection;
 
 class AbstractUnitTest extends TestCase
 {
+    /** @var AbstractUnit|MockInterface */
     protected $unit;
 
     protected function setUp(): void
     {
-        $this->unit = \Mockery::mock(
+        $this->unit = Mockery::mock(
             AbstractUnit::class,
             [
                 '500-999,1500-',
@@ -21,7 +26,7 @@ class AbstractUnitTest extends TestCase
             ],
             [
                 'getRangeUnit' => 'foobar',
-            ]
+            ],
         )->makePartial();
 
         $this->unit
@@ -30,25 +35,25 @@ class AbstractUnitTest extends TestCase
 
         $this->unit
             ->shouldReceive('newRange')
-            ->andReturn(\Mockery::mock(UnitRangeInterface::class));
+            ->andReturn(Mockery::mock(UnitRangeInterface::class));
     }
 
-    public function testGetRangeSet()
+    public function testGetRangeSet(): void
     {
         $this->assertSame('500-999,1500-', $this->unit->getRangeSet());
     }
 
-    public function testGetRangesSpecifier()
+    public function testGetRangesSpecifier(): void
     {
         $this->assertSame('foobar=500-999,1500-', $this->unit->getRangesSpecifier());
     }
 
-    public function testGetTotalSize()
+    public function testGetTotalSize(): void
     {
         $this->assertSame('10000', $this->unit->getTotalSize());
     }
 
-    public function testGetRanges()
+    public function testGetRanges(): void
     {
         $ranges = $this->unit->getRanges();
 

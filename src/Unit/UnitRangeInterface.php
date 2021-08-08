@@ -21,8 +21,6 @@ interface UnitRangeInterface
 {
     /**
      * Returns the raw range.
-     *
-     * @return string
      */
     public function getRange(): string;
 

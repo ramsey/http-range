@@ -1,23 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ramsey\Http\Range\Test;
 
 use Ramsey\Http\Range\Exception\InvalidRangeSetException;
 use Ramsey\Http\Range\Exception\InvalidRangeUnitException;
-use Ramsey\Http\Range\UnitFactory;
 use Ramsey\Http\Range\Unit\BytesUnit;
 use Ramsey\Http\Range\Unit\GenericUnit;
+use Ramsey\Http\Range\UnitFactory;
 
 class UnitFactoryTest extends TestCase
 {
-    public function testGetUnitReturnsBytesUnit()
+    public function testGetUnitReturnsBytesUnit(): void
     {
         $factory = new UnitFactory();
 
         $this->assertInstanceOf(BytesUnit::class, $factory->getUnit('bytes=30-100', 1000));
     }
 
-    public function testGetUnitReturnsGenericUnit()
+    public function testGetUnitReturnsGenericUnit(): void
     {
         $factory = new UnitFactory();
         $unit = $factory->getUnit('items=30-100', 1000);
@@ -26,7 +28,7 @@ class UnitFactoryTest extends TestCase
         $this->assertEquals('items', $unit->getRangeUnit());
     }
 
-    public function testGetUnitThrowsInvalidRangeUnitExceptionWhenNoRangeUnitProvided()
+    public function testGetUnitThrowsInvalidRangeUnitExceptionWhenNoRangeUnitProvided(): void
     {
         $factory = new UnitFactory();
 
@@ -36,7 +38,7 @@ class UnitFactoryTest extends TestCase
         $factory->getUnit('=30-100', 1000);
     }
 
-    public function testGetUnitThrowsInvalidRangeSetExceptionWhenNoRangeSetProvided()
+    public function testGetUnitThrowsInvalidRangeSetExceptionWhenNoRangeSetProvided(): void
     {
         $factory = new UnitFactory();
 
@@ -46,7 +48,7 @@ class UnitFactoryTest extends TestCase
         $factory->getUnit('items=', 1000);
     }
 
-    public function testGetUnitThrowsInvalidRangeUnitExceptionWhenNoValueProvided()
+    public function testGetUnitThrowsInvalidRangeUnitExceptionWhenNoValueProvided(): void
     {
         $factory = new UnitFactory();
 
@@ -56,7 +58,7 @@ class UnitFactoryTest extends TestCase
         $factory->getUnit('', 1000);
     }
 
-    public function testGetUnitThrowsInvalidRangeUnitExceptionWhenOnlyDelimiterProvided()
+    public function testGetUnitThrowsInvalidRangeUnitExceptionWhenOnlyDelimiterProvided(): void
     {
         $factory = new UnitFactory();
 

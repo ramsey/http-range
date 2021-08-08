@@ -18,10 +18,14 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "psr/http-message": "^1.0",
-        "ramsey/collection": "^1.0"
+        "ramsey/collection": "^1.0",
+        "symfony/polyfill-ctype": "^1.23"
     },
     "require-dev": {
         "ramsey/devtools": "^1.7"
+    },
+    "suggest": {
+        "ext-ctype": "Support for ctype_* functions."
     },
     "config": {
         "sort-packages": true
