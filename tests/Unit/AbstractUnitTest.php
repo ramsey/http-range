@@ -13,7 +13,10 @@ use Ramsey\Http\Range\Unit\UnitRangesCollection;
 
 class AbstractUnitTest extends TestCase
 {
-    /** @var AbstractUnit|MockInterface */
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint
+     * @var AbstractUnit|MockInterface
+     */
     protected $unit;
 
     protected function setUp(): void
