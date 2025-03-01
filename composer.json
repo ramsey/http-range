@@ -62,6 +62,9 @@
         "sort-packages": true
     },
     "extra": {
+        "branch-alias": {
+            "dev-main": "2.x-dev"
+        },
         "captainhook": {
             "force-install": true
         },
