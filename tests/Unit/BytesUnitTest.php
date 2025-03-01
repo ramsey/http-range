@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ramsey\Http\Range\Test\Unit;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Ramsey\Http\Range\Test\TestCase;
 use Ramsey\Http\Range\Unit\BytesUnit;
 
@@ -16,6 +17,7 @@ class BytesUnitTest extends TestCase
      *
      * @dataProvider validValuesProvider
      */
+    #[DataProvider('validValuesProvider')]
     public function testValidRangeValues(string $rangesString, int $size, array $expectedRanges): void
     {
         $bytes = new BytesUnit($rangesString, $size);
@@ -36,7 +38,7 @@ class BytesUnitTest extends TestCase
     /**
      * @return mixed[]
      */
-    public function validValuesProvider(): array
+    public static function validValuesProvider(): array
     {
         return [
             ['0-499', 1000, [['start' => 0, 'end' => 499]]],
