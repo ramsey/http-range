@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ramsey\Http\Range\Test\Unit;
 
 use Mockery;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Ramsey\Http\Range\Exception\NotSatisfiableException;
 use Ramsey\Http\Range\Exception\ParseException;
 use Ramsey\Http\Range\Test\TestCase;
@@ -87,6 +88,7 @@ class AbstractUnitRangeTest extends TestCase
     /**
      * @dataProvider validRangeValuesProvider
      */
+    #[DataProvider('validRangeValuesProvider')]
     public function testValidRangeValues(
         string $range,
         int $size,

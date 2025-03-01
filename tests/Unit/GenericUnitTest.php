@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ramsey\Http\Range\Test\Unit;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Ramsey\Http\Range\Test\TestCase;
 use Ramsey\Http\Range\Unit\GenericUnit;
 
@@ -16,6 +17,7 @@ class GenericUnitTest extends TestCase
      *
      * @dataProvider validValuesProvider
      */
+    #[DataProvider('validValuesProvider')]
     public function testValidRangeValues(string $unitName, string $rangesString, int $size, array $expectedRanges): void
     {
         $unit = new GenericUnit($unitName, $rangesString, $size);
