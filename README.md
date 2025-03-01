@@ -11,7 +11,6 @@
     <a href="https://github.com/ramsey/http-range/blob/main/LICENSE"><img src="https://img.shields.io/packagist/l/ramsey/http-range.svg?style=flat-square&colorB=darkcyan" alt="Read License"></a>
     <a href="https://github.com/ramsey/http-range/actions/workflows/continuous-integration.yml"><img src="https://img.shields.io/github/actions/workflow/status/ramsey/http-range/continuous-integration.yml?branch=main&logo=github&style=flat-square" alt="Build Status"></a>
     <a href="https://codecov.io/gh/ramsey/http-range"><img src="https://img.shields.io/codecov/c/gh/ramsey/http-range?label=codecov&logo=codecov&style=flat-square" alt="Codecov Code Coverage"></a>
-    <a href="https://shepherd.dev/github/ramsey/http-range"><img src="https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fshepherd.dev%2Fgithub%2Framsey%2Fhttp-range%2Fcoverage" alt="Psalm Type Coverage"></a>
 </p>
 
 ## About
