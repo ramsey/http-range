@@ -106,7 +106,7 @@ class AbstractUnitRangeTest extends TestCase
     /**
      * @return mixed[]
      */
-    public function validRangeValuesProvider(): array
+    public static function validRangeValuesProvider(): array
     {
         return [
             ['0-499', 1000, 0, 499, 500],

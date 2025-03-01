@@ -36,7 +36,7 @@ class BytesUnitTest extends TestCase
     /**
      * @return mixed[]
      */
-    public function validValuesProvider(): array
+    public static function validValuesProvider(): array
     {
         return [
             ['0-499', 1000, [['start' => 0, 'end' => 499]]],

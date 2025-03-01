@@ -18,8 +18,10 @@ use Ramsey\Http\Range\Exception\NotSatisfiableException;
 use Ramsey\Http\Range\Exception\ParseException;
 
 use function array_filter;
+use function assert;
 use function ctype_digit;
 use function explode;
+use function is_scalar;
 
 /**
  * `AbstractUnitRange` provides a basic implementation for unit ranges.
@@ -98,6 +100,9 @@ abstract class AbstractUnitRange implements UnitRangeInterface
      */
     public function getLength()
     {
+        assert(is_scalar($this->getEnd()));
+        assert(is_scalar($this->getStart()));
+
         return (int) $this->getEnd() - (int) $this->getStart() + 1;
     }
 
@@ -145,6 +150,8 @@ abstract class AbstractUnitRange implements UnitRangeInterface
                 "Unable to parse range: {$range}",
             );
         }
+
+        assert(is_scalar($totalSize));
 
         $totalSize = (int) $totalSize;
         $start = $points[0];

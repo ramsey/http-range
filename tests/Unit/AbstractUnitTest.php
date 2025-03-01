@@ -60,7 +60,6 @@ class AbstractUnitTest extends TestCase
     {
         $ranges = $this->unit->getRanges();
 
-        $this->assertInstanceOf(UnitRangesCollection::class, $ranges);
         $this->assertCount(2, $ranges);
     }
 }
