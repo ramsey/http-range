@@ -75,6 +75,16 @@ class GenericUnitTest extends TestCase
                     ['start' => 101, 'end' => 102],
                 ],
             ],
+            [
+                'items',
+                ' 0 - 199, 210-250 , 500- ',
+                1000,
+                [
+                    ['start' => 0, 'end' => 199],
+                    ['start' => 210, 'end' => 250],
+                    ['start' => 500, 'end' => 999],
+                ],
+            ],
         ];
     }
 }
