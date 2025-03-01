@@ -28,7 +28,7 @@ class GenericUnit extends AbstractUnit implements UnitInterface
      * @param string $rangeSet A set of ranges for this unit (i.e. `500-999,500-,-500`).
      * @param mixed $totalSize The total size of the entity the unit describes.
      */
-    public function __construct(string $rangeUnit, string $rangeSet, $totalSize)
+    public function __construct(string $rangeUnit, string $rangeSet, mixed $totalSize)
     {
         $this->rangeUnit = $rangeUnit;
         parent::__construct($rangeSet, $totalSize);
@@ -56,7 +56,7 @@ class GenericUnit extends AbstractUnit implements UnitInterface
      * @param string $range A single range (i.e. `500-999`, `500-`, `-500`).
      * @param mixed $totalSize The total size of the entity the range describes.
      */
-    public function newRange(string $range, $totalSize): UnitRangeInterface
+    public function newRange(string $range, mixed $totalSize): UnitRangeInterface
     {
         return new GenericRange($range, $totalSize);
     }

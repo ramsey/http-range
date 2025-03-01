@@ -94,7 +94,7 @@ class AbstractUnitRangeTest extends TestCase
         int $size,
         int $expectedStart,
         int $expectedEnd,
-        int $expectedLength
+        int $expectedLength,
     ): void {
         $unitRange = new MockUnitRange($range, $size);
 

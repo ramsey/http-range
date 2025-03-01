@@ -32,20 +32,11 @@ abstract class AbstractUnitRange implements UnitRangeInterface
 {
     private string $range;
 
-    /**
-     * @var mixed
-     */
-    private $totalSize;
+    private mixed $totalSize;
 
-    /**
-     * @var mixed
-     */
-    private $start;
+    private mixed $start;
 
-    /**
-     * @var mixed
-     */
-    private $end;
+    private mixed $end;
 
     /**
      * Constructs a new unit range.
@@ -56,7 +47,7 @@ abstract class AbstractUnitRange implements UnitRangeInterface
      * @throws ParseException if unable to parse the range.
      * @throws NotSatisfiableException if the range cannot be satisfied.
      */
-    public function __construct(string $range, $totalSize)
+    public function __construct(string $range, mixed $totalSize)
     {
         $this->range = $range;
         $this->totalSize = $totalSize;
@@ -133,7 +124,7 @@ abstract class AbstractUnitRange implements UnitRangeInterface
      * @throws ParseException if unable to parse the range.
      * @throws NotSatisfiableException if the range cannot be satisfied.
      */
-    private function parseRange(string $range, $totalSize): array
+    private function parseRange(string $range, mixed $totalSize): array
     {
         $points = explode('-', trim($range), 2);
 

@@ -37,7 +37,7 @@ class UnitFactory implements UnitFactoryInterface
      * @throws InvalidRangeUnitException if no range unit could be found.
      * @throws InvalidRangeSetException if no range set could be found.
      */
-    public function getUnit(string $rangesSpecifier, $totalSize): UnitInterface
+    public function getUnit(string $rangesSpecifier, mixed $totalSize): UnitInterface
     {
         $unitSet = explode('=', $rangesSpecifier);
 

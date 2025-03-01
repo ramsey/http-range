@@ -24,10 +24,7 @@ class NotSatisfiableException extends HttpRangeException
 {
     private string $range;
 
-    /**
-     * @var mixed
-     */
-    private $totalSize;
+    private mixed $totalSize;
 
     /**
      * Constructs a NotSatisfiableException.
@@ -42,9 +39,9 @@ class NotSatisfiableException extends HttpRangeException
     public function __construct(
         string $message,
         string $range,
-        $totalSize,
+        mixed $totalSize,
         int $code = 0,
-        ?Throwable $previous = null
+        ?Throwable $previous = null,
     ) {
         $this->range = $range;
         $this->totalSize = $totalSize;

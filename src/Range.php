@@ -31,10 +31,7 @@ class Range
 {
     private RequestInterface $request;
 
-    /**
-     * @var mixed
-     */
-    private $totalSize;
+    private mixed $totalSize;
 
     private UnitFactoryInterface $unitFactory;
 
@@ -49,8 +46,8 @@ class Range
      */
     public function __construct(
         RequestInterface $request,
-        $totalSize,
-        ?UnitFactoryInterface $unitFactory = null
+        mixed $totalSize,
+        ?UnitFactoryInterface $unitFactory = null,
     ) {
         $this->request = $request;
         $this->totalSize = $totalSize;
