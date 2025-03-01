@@ -85,9 +85,6 @@ class AbstractUnitRangeTest extends TestCase
         Mockery::mock(AbstractUnitRange::class, ['9999-500', '10000']);
     }
 
-    /**
-     * @dataProvider validRangeValuesProvider
-     */
     #[DataProvider('validRangeValuesProvider')]
     public function testValidRangeValues(
         string $range,
@@ -106,7 +103,7 @@ class AbstractUnitRangeTest extends TestCase
     }
 
     /**
-     * @return mixed[]
+     * @return list<array{string, int, int, int, int}>
      */
     public static function validRangeValuesProvider(): array
     {

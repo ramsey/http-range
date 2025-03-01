@@ -52,4 +52,4 @@ The ramsey/http-range library is copyright © [Ben Ramsey](https://benramsey.com
 and licensed for use under the MIT License (MIT). Please see [LICENSE](LICENSE)
 for more information.
 
-[http range requests]: https://tools.ietf.org/html/rfc7233
+[http range requests]: https://www.rfc-editor.org/rfc/rfc9110.html#section-14

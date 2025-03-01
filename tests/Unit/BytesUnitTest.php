@@ -13,9 +13,7 @@ use function count;
 class BytesUnitTest extends TestCase
 {
     /**
-     * @param array<array{start: int, end: int}> $expectedRanges
-     *
-     * @dataProvider validValuesProvider
+     * @param list<array{start: int, end: int}> $expectedRanges
      */
     #[DataProvider('validValuesProvider')]
     public function testValidRangeValues(string $rangesString, int $size, array $expectedRanges): void
@@ -36,7 +34,7 @@ class BytesUnitTest extends TestCase
     }
 
     /**
-     * @return mixed[]
+     * @return list<array{string, int, list<array{start: int, end: int}>}>
      */
     public static function validValuesProvider(): array
     {
