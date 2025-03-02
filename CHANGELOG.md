@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2.0.0 - 2025-03-02
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Update the minimum PHP version to 8.2
+- Add type declarations to all properties, method parameters, and method returns
+- The `$totalSize` parameters and `getTotalSize()` methods are now typed as
+  `float | int | string` instead of `mixed`
+- The `getStart()`, `getEnd()`, and `getLength()` methods on `UnitRangeInterface`
+  now return `float | int | string` instead of `mixed`
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 1.2.1 - 2025-03-01
 
 ### Added
